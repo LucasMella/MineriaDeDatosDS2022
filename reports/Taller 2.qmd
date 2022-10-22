@@ -1,0 +1,125 @@
+---
+title: "Taller 2 HTML"
+format: html
+editor: visual
+---
+
+# Taller 2
+
+Comenzamos importando las librerías que vamos a utilizar, importando y filtrando los datos.
+
+```{r warning = FALSE}
+
+
+library('dplyr')
+library('tidyr')
+library('readr')
+
+#Mascaras
+mask_agv <- readRDS("../data/data_raw/station_id_agv_Lucas.rds")
+
+#Sets de datos
+agv_meta <- readRDS("../data/data_raw/metadata_estaciones_agvAPI.rds")
+api_agv <- readRDS("../data/data_raw/data_agvAPI.rds")
+
+#Aplicación de máscaras
+agv_meta <- agv_meta[agv_meta$serial %in% mask_agv,]
+api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$serial %in% mask_agv,]))
+
+api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$tipo == "Humedad_Suelo",]))
+api_agv_rows <- api_agv_rows[!is.na(api_agv_rows)]
+api_agv <- api_agv[c(api_agv_rows)]
+```
+
+### 1. Utilizando `R-base`, `readr`, `tidyr` y lo visto de `{dplyr}` Debe extraer los datos de humedad de suelo a tres profundidades (30cm, 60cm y 90cm) desde el set de datos `data_agvAPI.rds` y utilizar el set de datos `metadata_estaciones_agvAPI.rds` para extaer la información necesaria de las estaciones. Debe realizarlo con todas las estaciones asignadas a usted. Debe crear un set de datos `tidy` (ej, tibble) que tenga las columnas de: serial, profundidad, fecha_hora, valor. Este set de datos debe contener los datos de humedad de suelo de todas las estaciones `AGV` asignadas a usted.
+
+Las variables `cols` y `vars` guardan los valores de la cantidad de variables que tiene la lista anidada, mientras `vars_un` guarda los valores unicos de vars.
+
+```{r}
+#cantidad de variables
+cols <- sapply(api_agv,ncol)
+vars <- sapply(api_agv,nrow)
+
+# varibles unicas 
+vars_un<- unique(vars)
+```
+
+```{r}
+cols
+vars
+vars_un
+```
+
+Vemos los indicadores de estaciones con 7 variables y saparamos para cada caso.
+
+```{r}
+#Indicadores de estaciones con 7 Variables
+ind7 <- vars %in% 7
+serial_est<- agv_meta$serial[ind7]
+
+data_sep <- lapply(vars_un,function(x){
+  api_agv[x == vars]
+})
+
+```
+
+Seleccionamos las filas según las profundidades 30, 60 y 90.
+
+```{r}
+#selecciona las filas de profundidad
+a <- lapply(data_sep[[1]],function(l){
+  out <- l |>
+    slice(1:3)
+  out$z <- c(90,60,30)
+  return(out)
+})
+```
+
+Desanidamos los datos y los ordenamos en `data_final`
+
+```{r}
+r <- lapply(seq_along(a), function(i){
+  out <- tryCatch(
+    a[[i]] |>
+      tidyr::unnest('data') |>
+      tidyr::hoist(3,'value')|>
+      dplyr::select(2,3,5) ,
+    error = function(e) NULL)
+  
+  if (!is.null(out)) out$serial <- serial_est[i]
+  if (is.list(out)) out <- out |> unnest('value')
+  return(out)
+})
+
+
+data_final<- do.call(rbind,r)
+data_final
+
+names <- c('Fecha_Hora', 'Valor', 'Profundidad', 'Serial')
+names -> colnames(data_final)
+
+data_final <- tibble(data_final)
+```
+
+## 2. El set de datos obtenido en el punto anterior lo debe ordenar de mayor a menor utilizando la función dplyr::arrange.
+
+```{r}
+data_final_ordenada <- arrange(data_final, desc(Valor))
+data_final_ordenada
+```
+
+## 3. Utilice la función tidyr::separate para crear una columna de fecha y otra de hora, a partir de la columnas fecha_hora.
+
+```{r}
+vec <- c('Fecha', 'Hora')
+data_final_separada <- separate(data_final_ordenada, 'Fecha_Hora', vec, sep=' ')
+data_final_separada
+```
+
+## 4. Haga un análisis de los valores faltantes (NAs) explicitos e implicitos. Utilice el paquete {tidyr}. Lo importante es saber si se encuentran valores para todas las fechas y en caso que no, saber cuantos datos faltan.
+
+```{r}
+nas <- data_final |> 
+  complete(Fecha_Hora, Serial, fill = list(valores = NA))
+nas
+```
