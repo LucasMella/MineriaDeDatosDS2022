@@ -1,0 +1,201 @@
+---
+title: "Taller 3 - Presentacion"
+author: "Lucas Mella"
+format: revealjs
+editor: visual
+---
+
+# Taller 3
+
+Para el Taller 3 se desarrollan los ejercicios dejados en las clases 8 - 11 del curso de Minería De Datos disponibles en el siguiente [Enlace](https://frzambra.github.io/DTSE1017/DTSE1017.html).
+
+##Importación de paquetes y sets de datos para el desarrollo del taller 3.
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+#Mascaras
+mask_agv <- readRDS("data/data_raw/station_id_agv_Lucas.rds")
+mask_agromet <- readRDS("data/data_raw/station_id_agromet_Lucas.rds")
+
+#Sets de datos
+agv_meta <- readRDS("data/data_raw/metadata_estaciones_agvAPI.rds")
+agromet_meta <- readRDS("data/data_raw/metadata_estaciones_agrometAPI.rds")
+api_agv <- readRDS("data/data_raw/data_agvAPI.rds")
+api_agromet <- readRDS("data/data_raw/data_estaciones_agrometAPI.rds")
+
+#Aplicación de máscaras
+agv_meta <- agv_meta[agv_meta$serial %in% mask_agv,]
+
+api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$serial %in% mask_agv,]))
+api_agv <- api_agv[c(api_agv_rows)]
+```
+
+## Clase 8
+
+### ReadR:
+
+#### 1. Leer los datos agromet del taller 1 con read_rds() ({readr})
+```{r}
+rds_data <- read_rds("data/data_raw/data_estaciones_agrometAPI.rds")
+
+```
+
+#### 2. Guardarlos en formato .csv con write_csv()
+```{r}
+write_csv(rds_data, 'data/data_proceseed/data_estaciones_agrometAPI.csv')
+
+```
+
+#### 3. Leer el archivo en formato .csv con read_csv()
+```{r}
+read_csv('data/data_proceseed/data_estaciones_agrometAPI.csv')
+
+```
+
+#### 4. Comparar el formato de los objetos en (1) y en (2)
+```{r}
+print("Read_rds: ")
+system.time(read_rds("../data/data_raw/data_estaciones_agrometAPI.rds"))
+
+```
+
+
+```{r, warning=FALSE}
+print("Read_csv: ")
+system.time(read_csv("../data/data_proceseed/data_estaciones_agrometAPI.csv"))
+
+```
+
+Vemos que los tiempos de performance son mayores para la carga de datos en formato csv. 
+
+### Tidyr
+
+#### 1. Con los datos de agromet cree datos anidados por estación (station_id) considerando todas las variables climáticas.
+```{r}
+data_nest <- api_agromet |> glimpse()
+
+```
+
+#### 2. De la data anidada extraiga el primer valor de la variable humedad relativa de la estación que se encuetra en la posición 5.
+```{r}
+
+```
+#### 3. Agregue la variable precipitación extraida de la columna anidada como una variable adicional
+```{r}
+
+```
+#### 4. Aplane (desanide) la variable de precipitación anterior.
+```{r}
+
+```
+#### 5. Haga explicitos los valores NA implicitos de precipitación. Comparé la cantidad de observaciones con la data original.
+```{r}
+
+```
+#### 6. Realice el rellenado de los valores NA de precipitación horaria tomando el valor anterior.
+```{r}
+
+```
+
+##Clase 9
+
+###Dplyr I
+#### 1. Filtrar con los datos de agromet para las estaciones asignadas (ej., Pablo, Jessica y Lucas)
+```{r}
+
+```
+#### 2. Filtrar los datos para los meses de Mayo a Julio en las estaciones asignadas.
+```{r}
+
+```
+#### 3. Tome una muestra de 1000 filas de forma aleatoria sin reemplazo.
+```{r}
+
+```
+#### 4. Para cada estación seleccione los valores máximos de precipitación horaria.
+```{r}
+
+```
+#### 5. Identifique las estaciones que tienen los mayores valores de precipitación horaria.
+```{r}
+
+```
+#### 6. Idem, pero para cada estación.
+```{r}
+
+```
+#### 7. Seleccione las columnas que tienen temperatura.
+```{r}
+
+```
+#### 8. Seleccione las columnas que tienen valores no numéricos.
+```{r}
+
+```
+##Clase 10
+
+###Dplyr II
+
+#### 1. Agrupe los datos de las climáticos de agromet por estación (group_by)
+```{r}
+
+```
+#### 2. Haga un sumarizado de promedio mensual de las variables de temperatura para cada estación (group_by, summarize y across).
+```{r}
+
+```
+#### 3. Renombre y reordene las variables como temp_prom, temp_max y Temp_min (rename_with y `relocate``)
+```{r}
+
+```
+#### 4. Cree las columnas var_temp y temp, en formato largo que contenga las variables de temp_prom, temp_max y Temp_min y sus valores. (pivot_longer)
+```{r}
+
+```
+#### 5. Ordene los datos anteriores de mayor a menor.
+```{r}
+
+```
+#### 6. Vuelva a formato ancho los datos del punto anterior.
+```{r}
+
+```
+#### 7. Caclule cuantos datos no faltantes (!is.na) tiene cada estacion para cada una de las variables.
+```{r}
+
+```
+##Clase 11
+
+###Dplyr III
+
+#### 1. Con los datos de agromet, calcule el promedio de temperatura (media, máxima, mínima) por día y estación. Utilice summarize y across.
+```{r}
+
+```
+#### 2. Para cada estacion calcule el valor de la mediana.
+```{r}
+
+```
+#### 3. Filtre las estaciones cuyo valor de temperatura promedio es mayor que la temperatura mediana.
+```{r}
+
+```
+#### 4. Verifique que los nombres de la estaciones son únicos (distinct).
+```{r}
+
+```
+#### 5. Extraiga la columna del nombre de la estaciones.
+```{r}
+
+```
+#### 6. Una el data.frame de los valores promedios de temperatura diario por estación con el data.frame de la metadata de las estaciones de agromet.
+```{r}
+
+```
+#### 7. Cree un data.frame con datos anidados con los valores de promedios de temperatura diario, por estación.
+```{r}
+
+```

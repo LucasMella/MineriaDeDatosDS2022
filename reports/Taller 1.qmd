@@ -1,0 +1,149 @@
+---
+title: "Taller 1 - Minería de Datos"
+format:
+  html:
+    toc: true
+editor: visual
+autor: Lucas Mella Vásquez
+---
+
+## 0. Cargar los Datos
+
+En este taller trabajaremos con datos obtenidos de estaciones climaticas en Chile. Estos presentan información de variables como la temperatura, la precipitación, la velocidad del viento.
+
+Se cargan los Datos de las estaciones agromet y AGV, además de sus respectivos dataframes con metadata asociada.
+
+```{r}
+#Mascaras
+mask_agv <- readRDS("station_id_agv_Lucas.rds")
+mask_agromet <- readRDS("station_id_agromet_Lucas.rds")
+
+#Sets de datos
+agv_meta <- readRDS("metadata_estaciones_agvAPI.rds")
+api_agv <- readRDS("data_agvAPI.rds")
+api_agromet <- readRDS("data_estaciones_agrometAPI.rds")
+agromet_meta <- readRDS("metadata_estaciones_agrometAPI.rds")
+
+#Aplicación de máscaras
+agromet_meta <- agromet_meta[agromet_meta$ema %in% mask_agromet,]
+agv_meta <- agv_meta[agv_meta$serial %in% mask_agv,]
+api_agromet <- api_agromet[api_agromet$station_id %in% mask_agromet,]
+api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$serial %in% mask_agv,]))
+api_agv <- api_agv[c(api_agv_rows)]
+```
+
+
+## 1. Reconocimiento de tipos y estructuras de datos
+
+Utilizamos la función class para reconocer las estructuras de los datos importados
+
+```{r}
+class(agromet_meta)
+class(agv_meta)
+class(api_agromet)
+class(api_agv)
+```
+
+Vemos que 3 sets de datos tienen estructura de dataframe, mientras que uno es una lista anidada o "Large list"
+
+
+## 2. Saber cantidad de variables de cada estación para los datos de AGV
+
+Dado que el set de datos de AGV presenta estructura de lista anidada, iteramos con lapply y ejecutamos la funcion unlist desanidarlo.
+
+```{r}
+df_agv <- lapply(api_agv, unlist)
+
+```
+
+Luego, iteramos dentro de la lista resultante y utilizamos la función length para saber la cantidad de variables. Además, generamos un daraframe con estos datos, el cual trasponemos para una mejor visualización.
+
+```{r}
+df_agv <- lapply(df_agv, length)
+df_agv <- as.data.frame(t(t(df_agv)), row.names = c(mask_agv))
+
+df_agv
+
+```
+
+
+## 3. Calcular suma diaria de precipitaciones y promedio diario de temperatura para los datos de agromet
+
+Para calcular la suma diaria de precipitaciones comenzamos agrupando por día los datos, ya que en los dataset se encuentran por hora, para ello, y por conveniencia, comenzamos seleccionando solo las columnas que vamos a trabajar para luego agregar una columna con la fecha truncada hasta el día.
+
+Luego con el uso de un tapply sumamos los datos diarios.
+
+```{r}
+agromet_agr <- api_agromet[c(1, 4, 9, 10)]
+agromet_agr$dia <- format(api_agromet$fecha_hora, "%d-%m-%Y")
+pdiaria <- tapply(agromet_agr$precipitacion_horaria, agromet_agr$dia, sum, na.rm = TRUE)
+
+#agromet_agr$precipitacion_diaria <- pdiaria
+
+```
+
+
+## 4. Creacion de data frame tipo tibble con variable de precipitacion acumulada diaria y temperaturas.
+
+Importamos la librería tibble y luego creamos un dataframe tipo tibble con la variable de precipitación acumulada diaria y la suma de las temperaturas.
+
+```{r}
+library(tibble)
+tibble_api_agromet <- as_tibble(agromet_agr)
+tibble_api_agromet
+
+```
+
+## 5. Creacion de data frames tipo tibble con variable humedad de suelo promedio diaria a 30cm, 60cm y 90cm y variable de temperatura promedio, maxíma y mínima diaria; y precipitación acumulada diaria.
+
+```{r}
+print("PREGUNTA CANCELADA")
+```
+
+## 6. Información resumida de datos.
+
+Se entrega la información resumida de todos los set de datos y además incluímos la cantidad de datos NA.
+
+```{r}
+summary(tibble_api_agromet)
+sum(is.na(api_agromet))
+
+summary(api_agv)
+sum(is.na(api_agv))
+
+summary(agromet_meta)
+sum(is.na(agromet_meta))
+
+summary(agv_meta)
+sum(is.na(agv_meta))
+```
+
+## 7. Se busca información de datos parquet y arrow. Para ello, consultamos los siguientes enlaces.
+
+[arrow](https://cran.r-project.org/web/packages/arrow/index.html) [parquet](https://arrow.apache.org/docs/r/reference/write_parquet.html)
+
+```{r}
+library(arrow)
+```
+
+## 8. Se guardan archivos en formato parquet y csv para comparar las performance respecto al formato .rds y .csv
+
+Empezamos exportando los datos en los formatos parquet y csv.
+
+Para ello utilizamos el set de datos agromet_meta por conveniencia.
+
+```{r}
+write.csv(agromet_meta,"agromet_meta.csv", row.names = FALSE)
+write_parquet(agromet_meta, "agromet_meta.parquet")
+readr::write_rds(agromet_meta, "agromet_meta.rds")
+```
+
+Con el fin de comparar las performance entre estos formatos, importamos la librería 'microbenchmark', la cual cuenta el tiempo que se demora en correr una función en R registrandolo por defecto en milisegundos.
+
+```{r}
+library(microbenchmark)
+microbenchmark(
+  opcion1 = read.csv("agromet_meta.csv"),
+  opcion2 = read_parquet("agromet_meta.parquet") ,
+  opcion3 = readRDS("agromet_meta.rds"))
+```
