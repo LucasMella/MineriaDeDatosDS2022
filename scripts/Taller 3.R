@@ -8,17 +8,16 @@ mask_agromet <- readRDS("data/data_raw/station_id_agromet_Lucas.rds")
 
 #Sets de datos
 agv_meta <- readRDS("data/data_raw/metadata_estaciones_agvAPI.rds")
-agromet_meta <- readRDS("data/data_raw/metadata_estaciones_agrometAPI.rds")
 api_agv <- readRDS("data/data_raw/data_agvAPI.rds")
 api_agromet <- readRDS("data/data_raw/data_estaciones_agrometAPI.rds")
+agromet_meta <- readRDS("data/data_raw/metadata_estaciones_agrometAPI.rds")
 
 #Aplicación de máscaras
+agromet_meta <- agromet_meta[agromet_meta$ema %in% mask_agromet,]
 agv_meta <- agv_meta[agv_meta$serial %in% mask_agv,]
-
+api_agromet <- api_agromet[api_agromet$station_id %in% mask_agromet,]
 api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$serial %in% mask_agv,]))
 api_agv <- api_agv[c(api_agv_rows)]
-
-#hoist select unnest glimpse
 
 #------------------I-------------------
 #ReadR
@@ -41,18 +40,29 @@ system.time(read_csv("data/data_proceseed/data_estaciones_agrometAPI.csv"))
   
 # 1 Con los datos de agromet cree datos anidados por estación (station_id) considerando todas las variables climáticas.
   
-data_nest <- api_agromet |>  nest(station_id = c(station_id, horas_frio, fecha_hora, temp_promedio_aire, temp_minima, temp_maxima, precipitacion_horaria, 
-                                                 humed_rel_promedio, presion_atmosferica, radiacion_solar_max, direccion_del_viento, 
-                                                 grados_dia, veloc_max_viento))
+data_nest <- 
+  api_agromet |>  
+  group_by(station_id) |> 
+  nest()
 
 # 2 De la data anidada extraiga el primer valor de la variable humedad relativa de la estación que se encuetra en la posición 5.
 
+data_nest$data[5][[1]][1,4] |> 
+  print()
 
+purrr::pluck(data_nest$data, 5,4,1)
 
 # 3 Agregue la variable precipitación extraida de la columna anidada como una variable adicional
 
-# 4 Aplane (desanide) la variable de precipitación anterior.
+data_nest |> 
+  hoist(data, precipitacion_horaria = 'precipitacion_horaria')
 
+# 4 Aplane (desanide) la variable de precipitación anterior.
+data_nest |> 
+  unnest(precipitacion_horaria)
+#hoist select unnest glimpse
+
+unnest
 # 5 Haga explicitos los valores NA implicitos de precipitación. Comparé la cantidad de observaciones con la data original.
 
 # 6 Realice el rellenado de los valores NA de precipitación horaria tomando el valor anterior.
@@ -60,9 +70,10 @@ data_nest <- api_agromet |>  nest(station_id = c(station_id, horas_frio, fecha_h
 #------------------III------------------
 
 #### 1. Filtrar con los datos de agromet para las estaciones asignadas (ej., Pablo, Jessica y Lucas)
-
+#PREGUNTAR SI SE HACE
 #### 2. Filtrar los datos para los meses de Mayo a Julio en las estaciones asignadas.
-
+mayojulio <- api_agromet |> 
+  select()
 #### 3. Tome una muestra de 1000 filas de forma aleatoria sin reemplazo.
 
 #### 4. Para cada estación seleccione los valores máximos de precipitación horaria.
