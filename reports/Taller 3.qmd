@@ -14,16 +14,17 @@ Para el Taller 3 se desarrollan los ejercicios dejados en las clases 8 - 11 del 
 library(dplyr)
 library(tidyr)
 library(readr)
+library(lubridate)
 
 #Mascaras
-mask_agv <- readRDS("data/data_raw/station_id_agv_Lucas.rds")
-mask_agromet <- readRDS("data/data_raw/station_id_agromet_Lucas.rds")
+mask_agv <- readRDS("../data/data_raw/station_id_agv_Lucas.rds")
+mask_agromet <- readRDS("../data/data_raw/station_id_agromet_Lucas.rds")
 
 #Sets de datos
-agv_meta <- readRDS("data/data_raw/metadata_estaciones_agvAPI.rds")
-api_agv <- readRDS("data/data_raw/data_agvAPI.rds")
-api_agromet <- readRDS("data/data_raw/data_estaciones_agrometAPI.rds")
-agromet_meta <- readRDS("data/data_raw/metadata_estaciones_agrometAPI.rds")
+agv_meta <- readRDS("../data/data_raw/metadata_estaciones_agvAPI.rds")
+api_agv <- readRDS("../data/data_raw/data_agvAPI.rds")
+api_agromet <- readRDS("../data/data_raw/data_estaciones_agrometAPI.rds")
+agromet_meta <- readRDS("../data/data_raw/metadata_estaciones_agrometAPI.rds")
 
 #Aplicación de máscaras
 agromet_meta <- agromet_meta[agromet_meta$ema %in% mask_agromet,]
@@ -33,46 +34,6 @@ api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$serial %in% mask_agv,]))
 api_agv <- api_agv[c(api_agv_rows)]
 ```
 
-## Clase 8
-
-### ReadR:
-
-#### 1. Leer los datos agromet del taller 1 con read_rds() ({readr})
-
-```{r}
-  rds_data <- read_rds("data/data_raw/data_estaciones_agrometAPI.rds")
-
-```
-
-#### 2. Guardarlos en formato .csv con write_csv()
-
-```{r}
-write_csv(rds_data, '../data/data_proceseed/data_estaciones_agrometAPI.csv')
-
-```
-
-#### 3. Leer el archivo en formato .csv con read_csv()
-
-```{r}
-read_csv('data/data_proceseed/data_estaciones_agrometAPI.csv')
-
-```
-
-#### 4. Comparar el formato de los objetos en (1) y en (2)
-
-```{r}
-print("Read_rds: ")
-system.time(read_rds("../data/data_raw/data_estaciones_agrometAPI.rds"))
-
-```
-
-```{r, warning=FALSE}
-print("Read_csv: ")
-system.time(read_csv("../data/data_proceseed/data_estaciones_agrometAPI.csv"))
-
-```
-
-Vemos que los tiempos de performance son mayores para la carga de datos en formato csv.
 
 ### Tidyr
 
@@ -87,188 +48,244 @@ data_nest <-
 
 #### 2. De la data anidada extraiga el primer valor de la variable humedad relativa de la estación que se encuetra en la posición 5.
 
-Se encuentran dos métodos:
-Mientras con R base la solución sería:
+Se encuentran dos métodos: Mientras con R base la solución sería:
+
 ```{r}
 data_nest$data[5][[1]][1,4] |> 
   print()
 ```
 
 Importando el paquete purrr puede utilizarse la función `pluck()`
+
 ```{r}
 purrr::pluck(data_nest$data, 5,4,1)
 ```
 
 La diferencia entre estos dos metodos radica en que la solucion usando solo R base es una lista, como indica a continuación.
+
 ```{r}
 typeof(data_nest$data[5][[1]][1,4])
 ```
+
 Y la funcion purrr::pluck() entrega un double.
+
 ```{r}
 typeof(purrr::pluck(data_nest$data, 5,4,1))
 ```
-#### 3. Agregue la variable precipitación extraida de la columna anidada como una variable adicional
+
+#### 3 Agregue la variable precipitación extraida de la columna anidada como una variable adicional y aplane (desanide) la variable de precipitacion, luego, haga explicitos los valores NA implicitos de precipitación. Compare la cantidad de observaciones con la data original.
 
 ```{r}
+a <- data_nest |> 
+  ungroup() |> 
+  hoist(data, 'precipitacion_horaria') |> 
+  unnest(precipitacion_horaria) |> 
+  select(1:2)
+```
+
+```{r}
+b <- data_nest |> 
+  ungroup() |> 
+  hoist(data, 'precipitacion_horaria') |> 
+  unnest(precipitacion_horaria) |> 
+  select(1:2) |> 
+  complete(station_id, precipitacion_horaria)
 
 ```
 
-#### 4. Aplane (desanide) la variable de precipitación anterior.
-
 ```{r}
-
+dim(a)
+dim(b)
 ```
 
-#### 5. Haga explicitos los valores NA implicitos de precipitación. Comparé la cantidad de observaciones con la data original.
+El set de datos adquiere 18040 valores más. Podemos comprobarlo restando sus dimensiones.
 
 ```{r}
-
+dim(b) - dim(a)
 ```
-
-#### 6. Realice el rellenado de los valores NA de precipitación horaria tomando el valor anterior.
+#### 4. Realice el rellenado de los valores NA de precipitación horaria tomando el valor anterior.
 
 ```{r}
-
+api_agromet |> 
+  select(station_id, fecha_hora, precipitacion_horaria) |> 
+  complete(fecha_hora, station_id) |> 
+  glimpse()
 ```
 
-##Clase 9
+## Clase 9
 
-###Dplyr I \#### 1. Filtrar con los datos de agromet para las estaciones asignadas (ej., Pablo, Jessica y Lucas)
+### Dplyr I
 
-```{r}
+#### 1. Filtrar con los datos de agromet para las estaciones asignadas (ej., Pablo, Jessica y Lucas)
 
-```
+Los datos fueron Filtrados al inicio del taller.
 
 #### 2. Filtrar los datos para los meses de Mayo a Julio en las estaciones asignadas.
 
 ```{r}
-
+mayojulio <- api_agromet |> 
+  mutate(fecha_hora = as.Date(api_agromet$fecha_hora), month = month(fecha_hora)) |> 
+  filter(month >= 05 & month <= 08)
 ```
 
 #### 3. Tome una muestra de 1000 filas de forma aleatoria sin reemplazo.
 
 ```{r}
-
+api_agromet |> 
+  slice_sample(n = 1000)
 ```
 
 #### 4. Para cada estación seleccione los valores máximos de precipitación horaria.
 
 ```{r}
-
+api_agromet |> 
+  group_by(station_id) |> 
+  slice_max(precipitacion_horaria, n= 5)
 ```
 
 #### 5. Identifique las estaciones que tienen los mayores valores de precipitación horaria.
 
 ```{r}
-
+api_agromet |> 
+  slice_max(precipitacion_horaria, n = 5) |> 
+  select(station_id)
 ```
 
-#### 6. Idem, pero para cada estación.
+#### 6. Seleccione las columnas que tienen temperatura.
 
 ```{r}
-
+api_agromet |>
+  select(station_id, fecha_hora, contains('temp'))
 ```
 
-#### 7. Seleccione las columnas que tienen temperatura.
+#### 7. Seleccione las columnas que tienen valores no numéricos.
 
 ```{r}
-
+api_agromet |> 
+  select(where(\(x) !is.numeric(x))) |> 
+  glimpse()
 ```
 
-#### 8. Seleccione las columnas que tienen valores no numéricos.
+## Clase 10
 
-```{r}
-
-```
-
-##Clase 10
-
-###Dplyr II
+### Dplyr II
 
 #### 1. Agrupe los datos de las climáticos de agromet por estación (group_by)
 
 ```{r}
-
+api_agromet |> 
+  group_by(station_id)
 ```
 
 #### 2. Haga un sumarizado de promedio mensual de las variables de temperatura para cada estación (group_by, summarize y across).
 
 ```{r}
-
+api_agromet |> 
+  group_by(station_id) |> 
+  summarise(across(contains('Temp'), mean, na.rm = TRUE))
 ```
 
 #### 3. Renombre y reordene las variables como temp_prom, temp_max y Temp_min (rename_with y \`relocate\`\`)
 
 ```{r}
+data_agromet <- api_agromet |> 
+  rename_with(contains('temp'),.fn = \(x) substr(x, start = 1, stop = 8))
 
+data_agromet |> 
+  relocate(temp_max, .after = temp_pro) |> 
+  relocate(temp_min, .after = last_col())
 ```
 
 #### 4. Cree las columnas var_temp y temp, en formato largo que contenga las variables de temp_prom, temp_max y Temp_min y sus valores. (pivot_longer)
 
 ```{r}
-
+data_agromet |> 
+  pivot_longer(c(3, 9, 10), names_to = 'var_temp', values_to = 'temp',)
 ```
 
 #### 5. Ordene los datos anteriores de mayor a menor.
 
 ```{r}
-
+data_agromet |> 
+  pivot_longer(c(3, 9, 10), names_to = 'var_temp', values_to = 'temp',) |> 
+  arrange(desc(temp))
 ```
 
 #### 6. Vuelva a formato ancho los datos del punto anterior.
 
 ```{r}
-
+data_agromet |> 
+  pivot_longer(c(3, 9, 10), names_to = 'var_temp', values_to = 'temp',) |> 
+  arrange(desc(temp)) |> 
+  pivot_wider(names_from = var_temp, values_from = temp)
 ```
 
 #### 7. Caclule cuantos datos no faltantes (!is.na) tiene cada estacion para cada una de las variables.
 
 ```{r}
-
+data_agromet |> 
+  select(station_id, contains('temp')) |> 
+  pivot_longer(2:4, names_to = 'var_temp', values_to = 'temp',) |> 
+  group_by(station_id, var_temp) |> 
+  summarise(NAs = sum(!is.na(temp)))
 ```
 
-##Clase 11
+## Clase 11
 
-###Dplyr III
+### Dplyr III
 
 #### 1. Con los datos de agromet, calcule el promedio de temperatura (media, máxima, mínima) por día y estación. Utilice summarize y across.
 
 ```{r}
-
+prom_agromet <- api_agromet |>
+  group_by(station_id) |> 
+  summarise(across(contains("temp"),\(x) mean(x, na.rm = TRUE), .names = "{.col}_prom"))
 ```
 
 #### 2. Para cada estacion calcule el valor de la mediana.
 
 ```{r}
-
+med_agromet <- api_agromet |> 
+  group_by(station_id) |> 
+  summarise(across(contains('temp'),\(x) median(x, na.rm = TRUE), .names = "{.col}_mediana"))
 ```
 
 #### 3. Filtre las estaciones cuyo valor de temperatura promedio es mayor que la temperatura mediana.
 
 ```{r}
-
+prom_agromet |> 
+  filter(temp_promedio_aire_prom > med_agromet$temp_promedio_aire_mediana)
 ```
 
 #### 4. Verifique que los nombres de la estaciones son únicos (distinct).
 
 ```{r}
-
+prom_agromet |>
+  distinct(station_id)
 ```
 
 #### 5. Extraiga la columna del nombre de la estaciones.
 
 ```{r}
-
+prom_agromet |> 
+  pull(station_id)
 ```
 
 #### 6. Una el data.frame de los valores promedios de temperatura diario por estación con el data.frame de la metadata de las estaciones de agromet.
 
 ```{r}
-
+agromet_meta |>
+  rename(station_id = ema) |> 
+  right_join(med_agromet, by = 'station_id') |>
+  glimpse()
 ```
 
 #### 7. Cree un data.frame con datos anidados con los valores de promedios de temperatura diario, por estación.
 
 ```{r}
-
+prom_agromet |> 
+  group_by(station_id) |> 
+  nest()
+  
+  
 ```
