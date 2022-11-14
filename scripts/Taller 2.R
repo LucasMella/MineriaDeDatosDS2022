@@ -38,7 +38,6 @@ data_sep <- lapply(vars_un,function(x){
 #nombres de variables 
 names <-  sapply(data_sep[[1]], purrr::pluck,1)
 
-##primer caso
 #seleccionar las filas de profundidad
 a <- lapply(data_sep[[1]],function(l){
   out <- l |>
