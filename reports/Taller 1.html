@@ -86,40 +86,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Taller 1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Taller 1_files/libs/quarto-html/quarto.js"></script>
+<script src="Taller 1_files/libs/quarto-html/popper.min.js"></script>
+<script src="Taller 1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Taller 1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Taller 1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Taller 1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Taller 1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Taller 1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Taller 1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body>
+<body class="fullcontent">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#cargar-los-datos" id="toc-cargar-los-datos" class="nav-link active" data-scroll-target="#cargar-los-datos">0. Cargar los Datos</a></li>
-  <li><a href="#reconocimiento-de-tipos-y-estructuras-de-datos" id="toc-reconocimiento-de-tipos-y-estructuras-de-datos" class="nav-link" data-scroll-target="#reconocimiento-de-tipos-y-estructuras-de-datos">1. Reconocimiento de tipos y estructuras de datos</a></li>
-  <li><a href="#saber-cantidad-de-variables-de-cada-estación-para-los-datos-de-agv" id="toc-saber-cantidad-de-variables-de-cada-estación-para-los-datos-de-agv" class="nav-link" data-scroll-target="#saber-cantidad-de-variables-de-cada-estación-para-los-datos-de-agv">2. Saber cantidad de variables de cada estación para los datos de AGV</a></li>
-  <li><a href="#calcular-suma-diaria-de-precipitaciones-y-promedio-diario-de-temperatura-para-los-datos-de-agromet" id="toc-calcular-suma-diaria-de-precipitaciones-y-promedio-diario-de-temperatura-para-los-datos-de-agromet" class="nav-link" data-scroll-target="#calcular-suma-diaria-de-precipitaciones-y-promedio-diario-de-temperatura-para-los-datos-de-agromet">3. Calcular suma diaria de precipitaciones y promedio diario de temperatura para los datos de agromet</a></li>
-  <li><a href="#creacion-de-data-frame-tipo-tibble-con-variable-de-precipitacion-acumulada-diaria-y-temperaturas." id="toc-creacion-de-data-frame-tipo-tibble-con-variable-de-precipitacion-acumulada-diaria-y-temperaturas." class="nav-link" data-scroll-target="#creacion-de-data-frame-tipo-tibble-con-variable-de-precipitacion-acumulada-diaria-y-temperaturas.">4. Creacion de data frame tipo tibble con variable de precipitacion acumulada diaria y temperaturas.</a></li>
-  <li><a href="#creacion-de-data-frames-tipo-tibble-con-variable-humedad-de-suelo-promedio-diaria-a-30cm-60cm-y-90cm-y-variable-de-temperatura-promedio-maxíma-y-mínima-diaria-y-precipitación-acumulada-diaria." id="toc-creacion-de-data-frames-tipo-tibble-con-variable-humedad-de-suelo-promedio-diaria-a-30cm-60cm-y-90cm-y-variable-de-temperatura-promedio-maxíma-y-mínima-diaria-y-precipitación-acumulada-diaria." class="nav-link" data-scroll-target="#creacion-de-data-frames-tipo-tibble-con-variable-humedad-de-suelo-promedio-diaria-a-30cm-60cm-y-90cm-y-variable-de-temperatura-promedio-maxíma-y-mínima-diaria-y-precipitación-acumulada-diaria.">5. Creacion de data frames tipo tibble con variable humedad de suelo promedio diaria a 30cm, 60cm y 90cm y variable de temperatura promedio, maxíma y mínima diaria; y precipitación acumulada diaria.</a></li>
-  <li><a href="#información-resumida-de-datos." id="toc-información-resumida-de-datos." class="nav-link" data-scroll-target="#información-resumida-de-datos.">6. Información resumida de datos.</a></li>
-  <li><a href="#se-busca-información-de-datos-parquet-y-arrow.-para-ello-consultamos-los-siguientes-enlaces." id="toc-se-busca-información-de-datos-parquet-y-arrow.-para-ello-consultamos-los-siguientes-enlaces." class="nav-link" data-scroll-target="#se-busca-información-de-datos-parquet-y-arrow.-para-ello-consultamos-los-siguientes-enlaces.">7. Se busca información de datos parquet y arrow. Para ello, consultamos los siguientes enlaces.</a></li>
-  <li><a href="#se-guardan-archivos-en-formato-parquet-y-csv-para-comparar-las-performance-respecto-al-formato-.rds-y-.csv" id="toc-se-guardan-archivos-en-formato-parquet-y-csv-para-comparar-las-performance-respecto-al-formato-.rds-y-.csv" class="nav-link" data-scroll-target="#se-guardan-archivos-en-formato-parquet-y-csv-para-comparar-las-performance-respecto-al-formato-.rds-y-.csv">8. Se guardan archivos en formato parquet y csv para comparar las performance respecto al formato .rds y .csv</a></li>
-  </ul>
-</nav>
-</div>
+
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -144,14 +128,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Se cargan los Datos de las estaciones agromet y AGV, además de sus respectivos dataframes con metadata asociada.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mascaras</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mask_agv <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"station_id_agv_Lucas.rds"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mask_agromet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"station_id_agromet_Lucas.rds"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mask_agv <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/data_raw/station_id_agv_Lucas.rds"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mask_agromet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/data_raw/station_id_agromet_Lucas.rds"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Sets de datos</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>agv_meta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"metadata_estaciones_agvAPI.rds"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>api_agv <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_agvAPI.rds"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>api_agromet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_estaciones_agrometAPI.rds"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>agromet_meta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"metadata_estaciones_agrometAPI.rds"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>agv_meta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/data_raw/metadata_estaciones_agvAPI.rds"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>api_agv <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/data_raw/data_agvAPI.rds"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>api_agromet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/data_raw/data_estaciones_agrometAPI.rds"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>agromet_meta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/data_raw/metadata_estaciones_agrometAPI.rds"</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Aplicación de máscaras</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>agromet_meta <span class="ot">&lt;-</span> agromet_meta[agromet_meta<span class="sc">$</span>ema <span class="sc">%in%</span> mask_agromet,]</span>
@@ -474,10 +458,10 @@ Attaching package: 'arrow'</code></pre>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opcion3 =</span> <span class="fu">readRDS</span>(<span class="st">"agromet_meta.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-    expr    min      lq     mean  median      uq     max neval
- opcion1  886.1 1021.90 1160.129 1156.05 1254.85  2785.2   100
- opcion2 3442.8 3612.30 4049.802 3762.60 3961.20 27459.3   100
- opcion3  280.4  306.95  403.344  400.75  490.35   918.2   100</code></pre>
+    expr    min      lq      mean   median      uq     max neval
+ opcion1 1986.2 2379.60  3164.760  3065.80  3659.3 10976.4   100
+ opcion2 6579.5 7909.30 10303.940 10284.45 11337.3 38731.7   100
+ opcion3  522.7  814.15  1012.012   995.45  1215.7  2778.4   100</code></pre>
 </div>
 </div>
 </section>

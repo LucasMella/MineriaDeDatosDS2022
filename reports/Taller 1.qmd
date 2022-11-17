@@ -1,8 +1,6 @@
 ---
 title: "Taller 1 - Minería de Datos"
-format:
-  html:
-    toc: true
+format: html
 editor: visual
 autor: Lucas Mella Vásquez
 ---
@@ -15,14 +13,14 @@ Se cargan los Datos de las estaciones agromet y AGV, además de sus respectivos 
 
 ```{r}
 #Mascaras
-mask_agv <- readRDS("station_id_agv_Lucas.rds")
-mask_agromet <- readRDS("station_id_agromet_Lucas.rds")
+mask_agv <- readRDS("../data/data_raw/station_id_agv_Lucas.rds")
+mask_agromet <- readRDS("../data/data_raw/station_id_agromet_Lucas.rds")
 
 #Sets de datos
-agv_meta <- readRDS("metadata_estaciones_agvAPI.rds")
-api_agv <- readRDS("data_agvAPI.rds")
-api_agromet <- readRDS("data_estaciones_agrometAPI.rds")
-agromet_meta <- readRDS("metadata_estaciones_agrometAPI.rds")
+agv_meta <- readRDS("../data/data_raw/metadata_estaciones_agvAPI.rds")
+api_agv <- readRDS("../data/data_raw/data_agvAPI.rds")
+api_agromet <- readRDS("../data/data_raw/data_estaciones_agrometAPI.rds")
+agromet_meta <- readRDS("../data/data_raw/metadata_estaciones_agrometAPI.rds")
 
 #Aplicación de máscaras
 agromet_meta <- agromet_meta[agromet_meta$ema %in% mask_agromet,]
@@ -31,7 +29,6 @@ api_agromet <- api_agromet[api_agromet$station_id %in% mask_agromet,]
 api_agv_rows <- as.numeric(rownames(agv_meta[agv_meta$serial %in% mask_agv,]))
 api_agv <- api_agv[c(api_agv_rows)]
 ```
-
 
 ## 1. Reconocimiento de tipos y estructuras de datos
 
@@ -45,7 +42,6 @@ class(api_agv)
 ```
 
 Vemos que 3 sets de datos tienen estructura de dataframe, mientras que uno es una lista anidada o "Large list"
-
 
 ## 2. Saber cantidad de variables de cada estación para los datos de AGV
 
@@ -66,7 +62,6 @@ df_agv
 
 ```
 
-
 ## 3. Calcular suma diaria de precipitaciones y promedio diario de temperatura para los datos de agromet
 
 Para calcular la suma diaria de precipitaciones comenzamos agrupando por día los datos, ya que en los dataset se encuentran por hora, para ello, y por conveniencia, comenzamos seleccionando solo las columnas que vamos a trabajar para luego agregar una columna con la fecha truncada hasta el día.
@@ -81,7 +76,6 @@ pdiaria <- tapply(agromet_agr$precipitacion_horaria, agromet_agr$dia, sum, na.rm
 #agromet_agr$precipitacion_diaria <- pdiaria
 
 ```
-
 
 ## 4. Creacion de data frame tipo tibble con variable de precipitacion acumulada diaria y temperaturas.
 

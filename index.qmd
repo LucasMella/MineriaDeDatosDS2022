@@ -1,0 +1,19 @@
+---
+title: "index"
+format: html
+editor: visual
+---
+
+## Talleres de Minería de Datos
+
+Este repositorio es creado para recopilar el trabajo hecho con los talleres del curso de minería de datos DTSE1017 en la Universidad Mayor
+
+## Talleres
+
+[Taller 1](reports/Taller 1.html)
+
+[Taller 2](reports/Taller 2.html)
+
+[Taller 3](reports/Taller 3.html)
+
+[Taller 4](reports/Taller 4.html)

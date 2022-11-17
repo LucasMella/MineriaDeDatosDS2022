@@ -1,0 +1,137 @@
+"ema","institucion","nombre_ema","comuna","region","latitud","longitud","fecha_de_alta"
+1,"FDF","Azapa1","Arica","Arica y Parinacota",-18.509638889,-70.248055554,2013-03-08 06:49:10
+3,"FDF","Tranque Lautaro","Tierra Amarilla","Atacama",-27.975583333,-70,2013-03-08 06:49:12
+5,"FDF","Hornitos","Tierra Amarilla","Atacama",-27.728888889,-70.196666667,2013-03-08 06:49:12
+16,"FDF","Combarbalá","Combarbalá","Coquimbo",-31.188333333,-70.998888889,2013-03-08 06:49:11
+18,"FDF","Illapel","Illapel","Coquimbo",-31.731055556,-71.205555556,2013-03-08 06:49:11
+19,"FDF","Salamanca","Salamanca","Coquimbo",-31.787388889,-70.959611111,2013-03-08 06:49:12
+21,"FDF","Petorca","Cabildo","Valparaíso",-32.396666667,-71.029444444,2013-03-08 06:49:10
+24,"FDF","Calle Larga","Calle Larga","Valparaíso",-32.870555556,-70.646111111,2013-03-08 06:49:10
+27,"FDF","Putaendo","Putaendo","Valparaíso",-32.593694444,-70.726111111,2013-03-08 06:49:12
+28,"FDF","Santa María","Santa María","Valparaíso",-32.749166667,-70.660277778,2013-03-08 06:49:12
+29,"FDF","Panquehue","Panquehue","Valparaíso",-32.756638889,-70.808833333,2013-03-08 06:49:11
+35,"FDF","Hijuelas","Hijuelas","Valparaíso",-32.847944444,-71.067083333,2013-03-08 06:49:11
+36,"FDF","Limache","Limache","Valparaíso",-32.994444444,-71.260666667,2013-03-08 06:49:11
+42,"FDF","Pirque","Pirque","Metropolitana",-33.673888889,-70.586944444,2013-03-08 06:49:12
+43,"FDF","Buin","Buin","Metropolitana",-33.707361111,-70.701555556,2013-03-08 06:49:10
+44,"FDF","Melipilla","El Monte","Metropolitana",-33.65,-71.1,2013-03-08 06:49:11
+45,"FDF","TALAGANTE","Talagante","Metropolitana",-33.67325,-70.921138889,2013-03-08 06:49:12
+46,"FDF","LO HERRERA","San Bernardo","Metropolitana",-33.662888889,-70.765916667,2013-03-08 06:49:12
+47,"FDF","HUELQUEN","Paine","Metropolitana",-33.862083333,-70.639194444,2013-03-08 06:49:11
+48,"FDF","COLINA","Colina","Metropolitana",-33.218777778,-70.715833333,2013-03-08 06:49:11
+66,"FDF","Olivar Alto","Olivar","O'Higgins",-34.203055556,-70.824166667,2013-03-08 06:49:11
+69,"FDF","Coltauco","Coltauco","O'Higgins",-34.237777778,-71.005,2013-03-08 06:49:11
+72,"FDF","El Carmen","San Fernando","O'Higgins",-34.608055556,-70.975,2013-03-08 06:49:12
+77,"FDF","Lolol","Lolol","O'Higgins",-34.713611111,-71.629722222,2013-03-08 06:49:11
+83,"FDF","Tres Esquinas","Molina","Maule",-35.144722222,-71.216111111,2013-03-08 06:49:11
+88,"FDF","Morza","Teno","Maule",-34.851666667,-71.020277778,2013-03-08 06:49:12
+89,"FDF","Teno","Teno","Maule",-34.878888889,-71.165277778,2013-03-08 06:49:12
+90,"FDF","Sagrada Familia","Sagrada Familia","Maule",-34.996944444,-71.374166667,2013-03-08 06:49:12
+91,"FDF","Rauco","Rauco","Maule",-34.925,-71.283055556,2013-03-08 06:49:12
+92,"FDF","Lontue","Molina","Maule",-35.049722222,-71.248055556,2013-03-08 06:49:11
+93,"FDF","Maule","San Javier","Maule",-35.576666667,-71.678888889,2013-03-08 06:49:12
+95,"FDF","Pencahue","Pencahue","Maule",-35.455833333,-71.772222222,2013-03-08 06:49:11
+99,"FDF","Linares 2","Longaví","Maule",-35.932194,-71.566833,2013-03-08 06:49:11
+100,"FDF","Longaví Norte","Longaví","Maule",-36.053611111,-71.683333333,2013-03-08 06:49:11
+101,"FDF","Longaví Sur","Longaví","Maule",-35.953055556,-71.608055556,2013-03-08 06:49:11
+105,"FDF","San Javier","San Javier","Maule",-35.629722222,-71.603888889,2013-03-08 06:49:12
+107,"FDF","Coihueco","Coihueco","Biobío",-36.557222222,-71.817222222,2013-03-08 06:49:11
+108,"FDF","Pinto","Pinto","Biobío",-36.713333333,-71.875555556,2013-03-08 06:49:12
+111,"FDF","Los Coligues Ex - Chillan Viejo","San Fabián","Biobío",-36.629166667,-72.233333333,2013-03-08 06:49:12
+112,"FDF","Bulnes","Bulnes","Biobío",-36.735555556,-72.366944444,2013-03-08 06:49:10
+114,"FDF","San Nicolás","San Nicolás","Biobío",-36.517777778,-72.094444444,2013-03-08 06:49:12
+115,"FDF","Renaico","Renaico","Araucanía",-37.726111111,-72.604722222,2013-03-08 06:49:12
+118,"FDF","Los Angeles","Los Ángeles","Biobío",-37.447222222,-72.517222222,2013-03-08 06:49:11
+123,"FDF","Traiguén","Traiguén","Araucanía",-38.357222222,-72.5475,2013-03-08 06:49:12
+128,"FDF","Loncoche","Pucón","Araucanía",-39.393333333,-72.636666667,2013-03-08 06:49:12
+132,"FDF","MAFIL","Máfil","Los Ríos",-39.631388889,-72.948333333,2013-03-08 06:49:11
+137,"FDF","Osorno","Osorno","Los Lagos",-40.533333333,-73.0725,2013-03-08 06:49:11
+143,"FDF","Coyhaique","Coyhaique","Aysén",-45.739722222,-72.125833333,2013-03-08 06:49:11
+153,"INIA","Calama Rural","Calama","Antofagasta",-22.471029833,-68.94298,2013-03-08 06:49:10
+157,"INIA","Toconao","San Pedro de Atacama","Antofagasta",-23.1905,-68.007169,2013-03-08 06:49:12
+164,"INIA","Cauquenes","Cauquenes","Maule",-35.955973,-72.289938,2013-03-08 06:49:11
+169,"INIA","Sauzal","Cauquenes","Maule",-35.714879,-72.111307833,2013-03-08 06:49:11
+172,"INIA","Coronel","Coronel","Biobío",-37.004823,-73.140405,2013-03-08 06:49:11
+173,"INIA","Human","Los Ángeles","Biobío",-37.433556,-72.243975,2013-03-08 06:49:11
+175,"INIA","Ninhue","Chillán","Biobío",-36.398105,-72.395202833,2013-03-08 06:49:11
+176,"INIA","Nueva Aldea","Concepción","Biobío",-36.648899833,-72.51349,2013-03-08 06:49:11
+179,"INIA","Sta Rosa","Chillán","Biobío",-36.535195,-71.916433833,2013-03-08 06:49:11
+182,"INIA","C. Llollinco","Teodoro Schmidt","Araucanía",-38.976944,-72.997777833,2013-03-08 06:49:12
+183,"INIA","Carillanca","Vilcún","Araucanía",-38.693055833,-72.417221833,2013-03-08 06:49:12
+189,"INIA","El Quincho","Cunco","Araucanía",-38.913175,-72.183514,2013-03-08 06:49:11
+190,"INIA","Curacautín-San Luis","Curacautín","Araucanía",-38.401667,-71.9025,2013-03-08 06:49:11
+192,"INIA","Tranapuente","Carahue","Araucanía",-38.690832833,-73.353333,2013-03-08 06:49:10
+193,"INIA","Lago Verde","Paillaco","Los Ríos",-40.165081,-72.633842833,2013-03-08 06:49:11
+199,"INIA","Los Canelos","Los Muermos","Los Lagos",-41.481326,-73.474378,2013-03-08 06:49:11
+200,"INIA","Octay","Puerto Octay","Los Lagos",-40.957155833,-72.885495,2013-03-08 06:49:12
+201,"INIA","Polizones","Fresia","Los Lagos",-41.115147,-73.376627833,2013-03-08 06:49:11
+205,"INIA","Chile Chico","Chile Chico","Aysén",-46.543241833,-71.699297833,2013-03-08 06:49:11
+209,"INIA","Puerto Natales","Natales","Magallanes",-51.698366833,-72.483081833,2013-03-08 06:49:11
+210,"INIA","Punta Arenas Rural","Punta Arenas","Magallanes",-53.068313,-70.873761,2013-03-08 06:49:12
+214,"METEOVID","Luis Felipe Edwards-Leyda","Santo Domingo","Valparaíso",-33.73975,-71.636778,2013-03-08 06:49:11
+218,"METEOVID","Casa Rivas (N.C.)","Curacaví","Metropolitana",-33.506388889,-71.060833333,2013-03-08 06:49:11
+222,"METEOVID","De Martino","Isla de Maipo","Metropolitana",-33.581944444,-70.880555556,2013-03-08 06:49:11
+224,"METEOVID","Pérez Cruz","Buin","Metropolitana",-33.843055556,-70.619722222,2013-03-08 06:49:10
+226,"METEOVID","Ventisquero","Buin","Metropolitana",-34.0225,-71.344166667,2013-03-08 06:49:10
+228,"METEOVID","La Rosa – Oeste","Peumo","O'Higgins",-34.325,-71.239444444,2013-03-08 06:49:11
+230,"METEOVID","Ventisquero-Peralillo","Peralillo","O'Higgins",-34.394444444,-71.445555556,2013-03-08 06:49:11
+233,"METEOVID","Conosur","Chimbarongo","O'Higgins",-34.715555556,-71.038611111,2013-03-08 06:49:11
+234,"METEOVID","Hacienda Araucano-Lolol","Peralillo","O'Higgins",-34.727222222,-71.588888889,2013-03-08 06:49:11
+245,"METEOVID","Guilisasti","Mulchén","Biobío",-37.648333333,-72.216111111,2013-03-08 06:49:11
+246,"METEOVID","Garcés Silva","San Antonio","Valparaíso",-33.681388889,-71.495833333,2013-03-08 06:49:11
+247,"METEOVID","Morandé","San Bernardo","Metropolitana",-33.581388889,-70.716666667,2013-03-08 06:49:12
+248,"METEOVID","San Pedro-El Tránsito","Paine","Metropolitana",-33.771111111,-70.685555556,2013-03-08 06:49:11
+249,"METEOVID","Santa Carolina","Paine","Metropolitana",-33.599722222,-70.649722222,2013-03-08 06:49:11
+250,"METEOVID","San Pedro-Totihue","Totihue","O'Higgins",-34.341111111,-70.727777778,2013-03-08 06:49:12
+251,"METEOVID","Luis Felipe Edwards","Colchagua","O'Higgins",-34.693055556,-71.156944444,2013-03-08 06:49:11
+261,"INIA","Caspana","Calama","Antofagasta",-22.334515,-68.213597,2013-05-08 12:24:25
+264,"INIA","Tierra del Fuego","Primavera","Magallanes",-52.804319889,-69.273691,2013-05-08 12:24:25
+265,"INIA","El Claro","Coyhaique","Aysén",-45.9812,-72.092267,2013-05-08 12:24:25
+271,"INIA","Desagüe Rupanco","Puyehue","Los Lagos",-40.752634,-72.663894,2013-05-08 12:24:25
+280,"FDF","El Guindo","La Ligua","Valparaíso",-32.35716683,-71.345472,2014-07-31 17:37:01
+283,"INIA","Amolana Copiapo 2","Tierra Amarilla","Atacama",-28,-70,2014-10-07 12:22:43
+294,"FDF","Placilla Chacarilla","Placilla","O'Higgins",-34.641583,-71.135667,2014-10-15 16:06:38
+309,"INIA","Cerro Blanco","Arica","Arica y Parinacota",-18.575,-70.07,2015-02-24 08:54:28
+310,"INIA","Chaca","Arica","Arica y Parinacota",-18.81,-70.156,2015-02-24 08:57:08
+311,"INIA","Santa Amada","Linares","Maule",-35.761,-71.48,2015-02-24 09:26:20
+313,"INIA","Marimenuco","Lonquimay","Araucanía",-38.731667,-71.140833,2015-07-03 11:22:01
+318,"INIA","Las Palmas","Victoria","Araucanía",-38.227778,-72.273333,2015-07-03 11:33:49
+319,"INIA","Surco y semilla","Collipulli","Araucanía",-38.0325,-72.285278,2015-07-03 11:35:03
+324,"CEAZA","Ovalle","Ovalle","Coquimbo",-30.59203,-71.24797,2015-12-14 13:43:01
+330,"CEAZA","El Tapado","Vicuña","Coquimbo",-30.1567,-69.91421,2016-01-13 16:43:14
+332,"CEAZA","Hualtatas","Monte Patria","Coquimbo",-31.70732,-70.525,2016-01-13 16:44:57
+335,"CEAZA","Pisco Elqui","Paiguano","Coquimbo",-30.11667,-70.48333,2016-01-13 16:48:08
+338,"CEAZA","Tascadero","Monte Patria","Coquimbo",-31.26282,-70.54,2016-01-13 16:53:19
+341,"CEAZA","Paso Aguas Negras","Vicuña","Coquimbo",-30.19137,-69.82546,2016-01-13 16:56:11
+348,"CEAZA","Cachiyuyo","Vallenar","Atacama",-29.0572,-70.90517,2016-01-13 17:09:01
+353,"CEAZA","Combarbalá","Combarbalá","Coquimbo",-31.20093,-71.00057,2016-01-13 17:28:32
+357,"CEAZA","Salamanca","Salamanca","Coquimbo",-31.89,-70.75,2016-01-13 17:35:09
+367,"METEOVID","Ventisquero - Leyda","San Antonio","Valparaíso",-33.68548333,-71.54943056,2016-07-11 11:05:56
+368,"INIA","Monte Flor-Tucapel","Parral","Maule",-36.2448,-71.93429,2016-08-02 16:21:44
+369,"INIA","Ponotro","Tirúa","Biobío",-38.27529,-73.498489,2016-08-02 16:27:05
+371,"INIA","El Membrillo","Melipeuco","Araucanía",-38.834167,-71.6825,2016-08-02 16:42:56
+373,"INIA","Rinconada-U de Chile","Maipú","Metropolitana",-33.497093,-70.845436,2016-08-02 16:47:51
+376,"INIA","Rucatayo","Río Bueno","Los Ríos",-40.598896,-72.586541,2016-08-02 16:54:00
+391,"INIA","Ticnamar","Arica","Arica y Parinacota",-18.58007,-69.495965,2017-05-05 09:54:20
+428,"FDF","Los Quilantos","Freire","Araucanía",-38.9083333,-72.7982222,2017-08-04 15:22:35
+433,"FDF","Vida Nueva","Villarrica","Araucanía",-39.1963889,-72.2613611,2017-08-04 15:24:08
+438,"FDF","Peldehue","Colina","Metropolitana",-33.1471111,-70.6602222,2017-08-08 09:22:10
+471,"INIA","5 de enero","San Gregorio","Magallanes",-52.432478,-70.360583,2017-08-31 16:03:22
+483,"INIA","Puente Negro","Pichilemu","O'Higgins",-34.386351,-71.98571,2017-08-31 16:11:56
+491,"INIA","San Jorge Los Niches","Curicó","Maule",-35.0918,-71.120579,2017-08-31 16:18:48
+499,"INIA","Colliguay","Quilpué","Valparaíso",-33.1686089,-71.1557171,2017-08-31 16:24:53
+527,"INIA","Carelmapu","Maullín","Los Lagos",-41.709733,-73.6722625,2017-08-31 16:41:13
+539,"INIA","San Enrique","Pucón","Araucanía",-39.261711,-71.868097,2017-08-31 16:52:35
+551,"INIA","Pica","Pica","Tarapacá",-20.501476,-69.342572,2017-08-31 16:56:54
+582,"INIA","La Copa","Caldera","Atacama",-27.345439,-70.622009,2017-09-26 20:00:35
+587,"METEOVID","Siegel","San Fernando","O'Higgins",-34.52545,-70.88758,2017-09-26 20:12:07
+592,"METEOVID","Via Wines","Curicó","Maule",-35.0904667,-71.177367,2017-09-26 20:14:40
+597,"METEOVID","Laberinto","Colbún","Maule",-35.6993,-71.2687,2017-09-26 20:15:34
+619,"INIA","La Cachina","Taltal","Antofagasta",-25.433987,-70.453243,2017-11-07 13:30:57
+625,"METEOVID","Concha y Toro - Pencahue","Pencahue","Maule",-35.44522,-71.83436,2018-01-29 16:57:25
+632,"INIA","Chaguaral","Monte Patria","Coquimbo",-30.857084,-70.730689,2018-03-07 12:07:55
+642,"INIA","San Sebastián","Perquenco","Araucanía",-38.435064,-72.399024,2018-03-07 12:19:23
+646,"INIA","El Vergel","Angol","Araucanía",-37.8278098,-72.6596649,2018-03-07 12:23:10
+650,"METEOVID","Viu Manent – Santa Cruz","Santa Cruz","O'Higgins",-34.646111111,-71.313611111,2019-07-17 09:40:23
+679,"INIA","Tenaún","Dalcahue","Los Lagos",-42.312675,-73.399902,2020-03-30 15:35:31
+682,"INIA","Ñirehuao","Coyhaique","Aysén",-45.249744,-71.69425,2020-03-30 15:36:37

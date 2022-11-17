@@ -103,20 +103,31 @@ region |>
   geom_boxplot() +
   coord_flip()
   
-regs <- agromet_meta |> 
+#regs <- agromet_meta |> 
   
-    
-  
-  
-  
-  
-  
-  
+anomalos <- function(x,...){
+  lim_inf <- quantile(x,.25,...) - 1.5*IQR(x,...)
+  lim_sup <- quantile(x,.75,...) - 1.5*IQR(x,...)
+  x[x < lim_inf | x > lim_sup] <- NA
+  return(x)
+}  
+
+api_agromet |> 
+  mutate(across(is.numeric, anomalos,na.rm = TRUE))
 
 
+ggplot()+
+  geom_boxplot(data_agro, aes())
 
 
+###
+
+iris |> 
+  group_by(Species) |> 
+  mutate(rcsl = sqrt(mean(Sepal.Length))) |> 
+  mutate(across(where(is.numeric),.fns = \(x) x/sqrt(mean(y)), y=Sepal.Length))
 
 
-
-
+f <- function(x,y){
+  x/sqrt(mean(x))
+}
